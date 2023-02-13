@@ -25,6 +25,31 @@ app.use((req, res, next) => {
 
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
+app.use('/', (req, res, next) => {
+  res.status(201).json({
+    message:'You can send requests to the following routes:',
+    url1: {
+      url: '/products',
+      requests: 'GET/POST'
+    },
+    url2: {
+      url: '/products/:productId',
+      requests: 'GET/PATCH/DELETE'
+    },
+    url3: {
+      url: '/products/special',
+      requests: 'GET/PATCH/DELETE'
+    },
+    url4: {
+      url: '/orders',
+      requests: 'GET/POST'
+    },
+    url5: {
+      url: '/orders/:orderId',
+      requests: 'GET'
+    },
+  })
+})
 
 app.use((req, res, next) => {
   const error = new Error('Not found');
